@@ -1,67 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Important Question 💗</title>
-  <style>
-    body {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #ffe6f0;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-    .box {
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    }
-    h1 {
-      margin-bottom: 30px;
-    }
-    button {
-      padding: 12px 30px;
-      margin: 10px;
-      font-size: 18px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-    }
-    .yes {
-      background: #ff4d88;
-      color: white;
-    }
-    .no {
-      background: #ccc;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Happy Birthday Siri ❤️</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Georgia', serif;
+  background: radial-gradient(circle at top, #ffccd5, #ff9aa2);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* HEARTS */
+.hearts {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.heart {
+  position: absolute;
+  color: pink;
+  animation: float 8s linear infinite;
+}
+@keyframes float {
+  from { transform: translateY(100vh); opacity: 0; }
+  to { transform: translateY(-10vh); opacity: 0.9; }
+}
+
+/* MAIN BOX */
+.box {
+  background: rgba(255,255,255,0.97);
+  padding: 40px;
+  border-radius: 28px;
+  text-align: center;
+  max-width: 480px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+}
+
+h1 { color: #c2185b; }
+
+button {
+  padding: 12px 30px;
+  margin: 10px;
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  background: #ff4d88;
+  color: white;
+}
+button:hover { background: #e91e63; }
+
+/* CANDLES */
+.candles {
+  font-size: 34px;
+  animation: flicker 1.4s infinite alternate;
+}
+@keyframes flicker {
+  0% { opacity: 0.95; }
+  100% { opacity: 0.6; }
+}
+
+/* FADE-IN TEXT */
+.fade {
+  opacity: 0;
+  animation: fadeIn 1.5s forwards;
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* TOAST */
+.toast {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff4d88;
+  color: white;
+  padding: 18px 28px;
+  border-radius: 20px;
+  font-size: 16px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  animation: dropToast 4s forwards;
+  z-index: 999;
+}
+@keyframes dropToast {
+  0% { top: -100px; opacity: 0; }
+  30% { top: 40px; opacity: 1; }
+  80% { top: 40px; opacity: 1; }
+  100% { top: -100px; opacity: 0; }
+}
+
+.photos img {
+  width: 100%;
+  border-radius: 18px;
+  margin-top: 18px;
+}
+</style>
 </head>
+
 <body>
 
-  <div class="box">
-    <h1>Do you like me? 🥺❤️</h1>
-    <button class="yes" onclick="yesAnswer()">Yes</button>
-    <button class="no" onclick="noAnswer()">No</button>
-  </div>
+<div class="hearts"></div>
 
-  <script>
-    function yesAnswer() {
-      document.body.innerHTML = `
-        <div class="box">
-          <h1>Correct answer 😌💘</h1>
-          <p>Happy Birthday my love 🎂❤️<br>
-          I choose you, always.</p>
-        </div>
-      `;
-    }
+<audio id="music" loop>
+  <source src="perfect.mp3" type="audio/mpeg">
+</audio>
 
-    function noAnswer() {
-      alert("Wrong answer 😤 Try again.");
-    }
-  </script>
+<div class="box" id="content">
+  <h1>Do you love me? 🥺❤️</h1>
+  <button onclick="next1()">Yes</button>
+  <button onclick="wrong()">No</button>
+</div>
+
+<script>
+// FLOATING HEARTS
+for (let i = 0; i < 35; i++) {
+  let h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "❤️";
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.fontSize = (18 + Math.random() * 26) + "px";
+  h.style.animationDuration = (5 + Math.random() * 6) + "s";
+  document.querySelector(".hearts").appendChild(h);
+}
+
+function wrong() {
+  alert("Wrong answer 😤 Try again.");
+}
+
+// STEP 1
+function next1() {
+  document.getElementById("music").play();
+  document.getElementById("content").innerHTML = `
+    <h1>Two Truths & One Lie 😏 Choose the lie</h1>
+    <button onclick="wrong()">nikki loves siri</button>
+    <button onclick="wrong()">siri is the best person in the entire world</button>
+    <button onclick="correct()">nikki is gay</button>
+  `;
+}
+
+// LIE SELECTED
+function correct() {
+  document.getElementById("content").innerHTML = `<h1>Correct ❤️</h1>`;
+  setTimeout(next2, 1200);
+}
+
+// FAVORITE QUESTION
+function next2() {
+  document.getElementById("content").innerHTML = `
+    <h1>What’s my favorite thing about you?</h1>
+    <button onclick="showToast()">watching movies together</button>
+    <button onclick="showToast()">your attitude</button>
+    <button onclick="showToast()">us studying together</button>
+  `;
+}
+
+// TOAST + FINAL
+function showToast() {
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.innerHTML = `
+    Sike — it’s all of the above.<br>
+    I don’t love parts of you… I love <b>you</b>, entirely.
+  `;
+  document.body.appendChild(toast);
+
+  setTimeout(() => {
+    toast.remove();
+    finalPage();
+  }, 4000);
+}
+
+// FINAL PAGE
+function finalPage() {
+  document.querySelectorAll(".heart").forEach(h => h.style.color = "red");
+
+  document.body.innerHTML = `
+    <div class="hearts"></div>
+    <div class="box">
+      <h1 class="fade" style="animation-delay:0.5s;">Happy Birthday Siri🎂</h1>
+      <div class="candles fade" style="animation-delay:1.5s;">🕯️ 🕯️ 🕯️</div>
+
+      <p class="fade" style="animation-delay:3s;">
+        You are my calm in the chaos,<br>
+        my warmth on the coldest days,<br>
+        my quiet certainty in a loud world.
+      </p>
+
+      <p class="fade" style="animation-delay:5s;">
+        Thank you for being exactly who you are.<br>
+        Happy Birthday, my love ❤️
+      </p>
+
+      <div class="photos fade" style="animation-delay:6.5s;">
+        <img src="photo1.jpeg">
+        <img src="photo2.jpeg">
+      </div>
+    </div>
+  `;
+}
+</script>
 
 </body>
 </html>
