@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Important Question 💗</title>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ffe6f0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .box {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    h1 {
+      margin-bottom: 30px;
+    }
+    button {
+      padding: 12px 30px;
+      margin: 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+    .yes {
+      background: #ff4d88;
+      color: white;
+    }
+    .no {
+      background: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h1>Do you like me? 🥺❤️</h1>
+    <button class="yes" onclick="yesAnswer()">Yes</button>
+    <button class="no" onclick="noAnswer()">No</button>
+  </div>
+
+  <script>
+    function yesAnswer() {
+      document.body.innerHTML = `
+        <div class="box">
+          <h1>Correct answer 😌💘</h1>
+          <p>Happy Birthday my love 🎂❤️<br>
+          I choose you, always.</p>
+        </div>
+      `;
+    }
+
+    function noAnswer() {
+      alert("Wrong answer 😤 Try again.");
+    }
+  </script>
+
+</body>
+</html>
