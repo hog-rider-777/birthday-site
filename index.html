@@ -69,7 +69,7 @@ button:hover { background: #e91e63; }
   100% { opacity: 0.6; }
 }
 
-/* FADE-IN TEXT */
+/* FADE-IN */
 .fade {
   opacity: 0;
   animation: fadeIn 1.5s forwards;
@@ -81,7 +81,7 @@ button:hover { background: #e91e63; }
 /* TOAST */
 .toast {
   position: fixed;
-  top: -100px;
+  top: -120px;
   left: 50%;
   transform: translateX(-50%);
   background: #ff4d88;
@@ -95,10 +95,10 @@ button:hover { background: #e91e63; }
   z-index: 999;
 }
 @keyframes dropToast {
-  0% { top: -100px; opacity: 0; }
-  30% { top: 40px; opacity: 1; }
-  80% { top: 40px; opacity: 1; }
-  100% { top: -100px; opacity: 0; }
+  0% { top: -120px; opacity: 0; }
+  25% { top: 40px; opacity: 1; }
+  75% { top: 40px; opacity: 1; }
+  100% { top: -120px; opacity: 0; }
 }
 
 .photos img {
@@ -113,6 +113,7 @@ button:hover { background: #e91e63; }
 
 <div class="hearts"></div>
 
+<!-- MUSIC (NEVER REMOVED, SO IT NEVER STOPS) -->
 <audio id="music" loop>
   <source src="perfect.mp3" type="audio/mpeg">
 </audio>
@@ -139,24 +140,24 @@ function wrong() {
   alert("Wrong answer 😤 Try again.");
 }
 
-// STEP 1
+/* STEP 1 */
 function next1() {
   document.getElementById("music").play();
   document.getElementById("content").innerHTML = `
-    <h1>Two Truths & One Lie 😏 Choose the lie</h1>
+    <h1>Two Truths & One Lie 😏</h1>
     <button onclick="wrong()">nikki loves siri</button>
     <button onclick="wrong()">siri is the best person in the entire world</button>
     <button onclick="correct()">nikki is gay</button>
   `;
 }
 
-// LIE SELECTED
+/* CORRECT LIE */
 function correct() {
   document.getElementById("content").innerHTML = `<h1>Correct ❤️</h1>`;
   setTimeout(next2, 1200);
 }
 
-// FAVORITE QUESTION
+/* FAVORITE QUESTION */
 function next2() {
   document.getElementById("content").innerHTML = `
     <h1>What’s my favorite thing about you?</h1>
@@ -166,7 +167,7 @@ function next2() {
   `;
 }
 
-// TOAST + FINAL
+/* TOAST THEN FINAL */
 function showToast() {
   const toast = document.createElement("div");
   toast.className = "toast";
@@ -182,31 +183,27 @@ function showToast() {
   }, 4000);
 }
 
-// FINAL PAGE
+/* FINAL PAGE (MUSIC CONTINUES) */
 function finalPage() {
   document.querySelectorAll(".heart").forEach(h => h.style.color = "red");
 
-  document.body.innerHTML = `
-    <div class="hearts"></div>
-    <div class="box">
-      <h1 class="fade" style="animation-delay:0.5s;">Happy Birthday Siri🎂</h1>
-      <div class="candles fade" style="animation-delay:1.5s;">🕯️ 🕯️ 🕯️</div>
+  document.getElementById("content").innerHTML = `
+    <h1 class="fade" style="animation-delay:0.5s;">🎂 Happy Birthday Siri 🎂</h1>
+    <div class="candles fade" style="animation-delay:1.5s;">🕯️ 🕯️ 🕯️</div>
 
-      <p class="fade" style="animation-delay:3s;">
-        You are my calm in the chaos,<br>
-        my warmth on the coldest days,<br>
-        my quiet certainty in a loud world.
-      </p>
+    <p class="fade" style="animation-delay:3s;">
+      You are my calm in the chaos,<br>
+      my warmth on the coldest days,<br>
+      my quiet certainty in a loud world.
+    </p>
 
-      <p class="fade" style="animation-delay:5s;">
-        Thank you for being exactly who you are.<br>
-        Happy Birthday, my love ❤️
-      </p>
+    <p class="fade" style="animation-delay:5s;">
+      Thank you for being exactly who you are.<br>
+      Happy Birthday, my love ❤️
+    </p>
 
-      <div class="photos fade" style="animation-delay:6.5s;">
-        <img src="photo1.jpeg">
-        <img src="photo2.jpeg">
-      </div>
+    <div class="photos fade" style="animation-delay:6.5s;">
+      <img src="photo1.jpeg">
     </div>
   `;
 }
